@@ -20,6 +20,11 @@ const (
 	TURSO_PORT    = "8080"
 )
 
+// NewTurso starts a Turso docker container. Returns db connection and a docker cleanup function.
+func NewTurso(options ...OptionsFunc) (db *sql.DB, cleanup func(), err error) {
+	return newTurso(options...)
+}
+
 func newTurso(opts ...OptionsFunc) (*sql.DB, func(), error) {
 	option := &options{}
 	for _, f := range opts {
